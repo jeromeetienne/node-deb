@@ -1,0 +1,2 @@
+# where the temporary files are stored (e.g. the nodejs source)
+tmp/
