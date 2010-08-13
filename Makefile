@@ -1,11 +1,15 @@
+# full operation: make src_delete src_import ppa_upload
+
 # define variables
-PKGNAME="nodejsexp"
-VERSION="0.1.103"
+PKGNAME="nodejs"
+VERSION="0.1.104"
 
 TMP_DIR=tmp/
 SRC_DIR=$(TMP_DIR)/node
 SRC_GIT=http://github.com/ry/node.git
 SRC_TAG=v$(VERSION)
+
+distclean: src_delete deb_clean
 
 #################################################################################
 #		node src handling						#
@@ -48,5 +52,5 @@ deb_upd_changelog:
 deb_clean:
 	rm -f ../$(PKGNAME)_$(VERSION)~lucid1~ppa*
 
-ppa_upload: clean build deb_clean deb_upd_changelog deb_src_build
+ppa_upload: clean deb_clean deb_upd_changelog deb_src_build
 	dput -U ppa:jerome-etienne/neoip ../$(PKGNAME)_$(VERSION)~lucid1~ppa*_source.changes 
