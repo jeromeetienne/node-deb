@@ -2,14 +2,18 @@
 
 # define variables
 PKGNAME="nodejs"
-VERSION="0.1.104"
+VERSION="0.2.0"
 
-TMP_DIR=tmp/
-SRC_DIR=$(TMP_DIR)/node
-SRC_GIT=http://github.com/ry/node.git
-SRC_TAG=v$(VERSION)
+PWD	:= $(shell pwd)
+TMP_DIR	:= $(PWD)/tmp
+SRC_DIR	:= $(TMP_DIR)/node
+SRC_GIT	:= http://github.com/ry/node.git
+SRC_TAG	:= v$(VERSION)
 
-distclean: src_delete deb_clean
+
+all: build
+
+mydistclean: src_delete deb_clean
 
 #################################################################################
 #		node src handling						#
@@ -52,5 +56,5 @@ deb_upd_changelog:
 deb_clean:
 	rm -f ../$(PKGNAME)_$(VERSION)~lucid1~ppa*
 
-ppa_upload: clean deb_clean deb_upd_changelog deb_src_build
+ppa_upload: src_delete src_import clean deb_clean deb_upd_changelog deb_src_build
 	dput -U ppa:jerome-etienne/neoip ../$(PKGNAME)_$(VERSION)~lucid1~ppa*_source.changes 
