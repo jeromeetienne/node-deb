@@ -9,3 +9,6 @@ sudo apt-get install nodejs
 nodejs will be automatically updated when you do the usual apt-get upgrade
 $ node -v
 v0.1.103
+
+to install dependancies
+sudo sh deps.sh
