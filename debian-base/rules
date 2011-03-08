@@ -15,9 +15,12 @@ export DH_VERBOSE=1
 # jme- various default that i disabled - not too sure about this
 override_dh_auto_configure:
 	echo configure is done in Makefile build
-	
+
 override_dh_auto_test:
 	echo notest
-	
+
 override_dh_usrlocal:
 	echo this is failling but i dunno why, so i disable
+
+override_dh_builddeb:
+	export NO_PKG_MANGLE=1 && dpkg-deb --build debian/nodejs ..

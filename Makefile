@@ -1,15 +1,16 @@
 # full operation: make src_delete src_import ppa_upload
 
 # define variables
+# - to get the codename => $ lsb_release -c -s
 PKGNAME="nodejs"
 VERSION="0.4.2"
+CODENAME="maverick"
 
 PWD	:= $(shell pwd)
 TMP_DIR	:= $(PWD)/tmp
 SRC_DIR	:= $(TMP_DIR)/node
 SRC_GIT	:= http://github.com/ry/node.git
 SRC_TAG	:= v$(VERSION)
-
 
 all: build
 
@@ -35,7 +36,7 @@ clean:
 	(cd $(SRC_DIR) && make clean; true)
 
 build:
-	(cd $(SRC_DIR) && ./configure && make)
+	(cd $(SRC_DIR) && export GCC_VERSION=44 && ./configure && make)
 
 install:
 	(cd $(SRC_DIR) && make install)
@@ -44,6 +45,10 @@ install:
 #		deb package handling						#
 #################################################################################
 
+deb_base_build:
+	cp -a debian-base debian
+	for i in debian/*; do sed -i s/lucid/$(CODENAME)/g $$i; done
+
 deb_src_build:
 	debuild -S -k'jerome etienne' -I.git
 
@@ -51,10 +56,11 @@ deb_bin_build:
 	debuild -i -us -uc -b
 
 deb_upd_changelog:
-	dch --newversion $(VERSION)~lucid1~ppa`date +%Y%m%d%H%M` --maintmaint --force-bad-version --distribution `lsb_release -c -s` Another build
+	dch --newversion $(VERSION)~$(CODENAME)1~ppa`date +%Y%m%d%H%M` --maintmaint --force-bad-version --distribution `lsb_release -c -s` Another build
 
 deb_clean:
-	rm -f ../$(PKGNAME)_$(VERSION)~lucid1~ppa*
+	rm -fr ./debian
+	rm -f ../$(PKGNAME)_$(VERSION)~$(CODENAME)1~ppa*
 
-ppa_upload: src_delete src_import clean deb_clean deb_upd_changelog deb_src_build
-	dput -U ppa:jerome-etienne/neoip ../$(PKGNAME)_$(VERSION)~lucid1~ppa*_source.changes 
+ppa_upload: src_delete src_import clean deb_clean deb_base_build deb_upd_changelog deb_src_build
+	dput -U ppa:jerome-etienne/neoip ../$(PKGNAME)_$(VERSION)~$(CODENAME)1~ppa*_source.changes 
