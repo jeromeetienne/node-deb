@@ -9,7 +9,7 @@ CODENAME="maverick"
 PWD	:= $(shell pwd)
 TMP_DIR	:= $(PWD)/tmp
 SRC_DIR	:= $(TMP_DIR)/node
-SRC_GIT	:= http://github.com/ry/node.git
+SRC_GIT	:= https://github.com/joyent/node.git
 SRC_TAG	:= v$(VERSION)
 
 all: build
@@ -21,7 +21,7 @@ mydistclean: src_delete deb_clean
 #################################################################################
 
 src_import:
-	mkdir $(SRC_DIR)
+	mkdir -p $(SRC_DIR)
 	(cd $(TMP_DIR) && git clone $(SRC_GIT))
 	(cd $(SRC_DIR) && git checkout $(SRC_TAG))
 
