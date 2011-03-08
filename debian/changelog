@@ -1,3 +1,15 @@
+nodejs (0.2.3~lucid1~ppa201010111454) lucid; urgency=low
+
+  * Another build
+
+ -- Jerome Etienne <jerome.etienne@gmail.com>  Mon, 11 Oct 2010 14:54:48 +0200
+
+nodejs (0.2.3~lucid1~ppa201010111452) lucid; urgency=low
+
+  * Another build
+
+ -- Jerome Etienne <jerome.etienne@gmail.com>  Mon, 11 Oct 2010 14:53:00 +0200
+
 nodejs (0.2.0~lucid1~ppa201008201232) lucid; urgency=low
 
   * Another build

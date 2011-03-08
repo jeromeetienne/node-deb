@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Komodo Project File - DO NOT EDIT -->
-<project id="6628c14d-d8ee-42cb-a58c-ab87c2887cdc" kpf_version="4" name="node-deb.kpf">
-<preference-set idref="6628c14d-d8ee-42cb-a58c-ab87c2887cdc">
-  <boolean id="import_live">1</boolean>
-</preference-set>
-</project>

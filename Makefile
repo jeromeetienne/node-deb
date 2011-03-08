@@ -2,7 +2,7 @@
 
 # define variables
 PKGNAME="nodejs"
-VERSION="0.2.0"
+VERSION="0.4.2"
 
 PWD	:= $(shell pwd)
 TMP_DIR	:= $(PWD)/tmp
